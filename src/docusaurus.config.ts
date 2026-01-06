@@ -1,6 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import type * as Redocusaurus from 'redocusaurus';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -47,6 +48,20 @@ const config: Config = {
                 },
             } satisfies Preset.Options,
         ],
+        [
+            'redocusaurus',
+            {
+                specs: [
+                    {
+                        spec: 'openapi/Rocket.Api.Host.json',
+                        route: '/api/',
+                    },
+                ],
+                theme: {
+                    primaryColor: '#1890ff',
+                },
+            },
+        ] satisfies Redocusaurus.PresetEntry,
     ],
 
     themeConfig: {
@@ -64,21 +79,14 @@ const config: Config = {
             items: [
                 {
                     type: 'docSidebar',
-                    sidebarId: 'generalSidebar',
+                    sidebarId: 'documentationSidebar',
                     position: 'left',
-                    label: 'General',
+                    label: 'Documentation',
                 },
                 {
-                    type: 'docSidebar',
-                    sidebarId: 'clientSidebar',
+                    to: '/api',
                     position: 'left',
-                    label: 'Client App',
-                },
-                {
-                    type: 'docSidebar',
-                    sidebarId: 'serverSidebar',
-                    position: 'left',
-                    label: 'Server App',
+                    label: 'API Reference'
                 }
             ],
         },

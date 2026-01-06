@@ -1,0 +1,345 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Rocket.Api.Host | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/capture/process": {
+      "post": {
+        "tags": [
+          "Capture"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Form": {
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "value": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/connection": {
+      "post": {
+        "tags": [
+          "Connection"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Health check",
+        "description": "Get the health check status of the server.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/scans/fetch": {
+      "post": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/scans/{id}": {
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/startup/phase": {
+      "get": {
+        "tags": [
+          "Startup"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/create": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/update": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "TODO",
+        "description": "TODO",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTheNewAdmin": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MyScansRequest": {
+        "type": "object",
+        "properties": {
+          "startIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recordCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UserDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastLoginAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isAdmin": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Capture"
+    },
+    {
+      "name": "Connection"
+    },
+    {
+      "name": "HealthCheck"
+    },
+    {
+      "name": "Scans"
+    },
+    {
+      "name": "Startup"
+    },
+    {
+      "name": "User"
+    }
+  ]
+}
