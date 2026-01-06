@@ -10,8 +10,8 @@
         "tags": [
           "Capture"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Process captured image(s)",
+        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
@@ -58,8 +58,8 @@
         "tags": [
           "Connection"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Connection health check (authenticated)",
+        "description": "This endpoint will provide a status of the authenticated connection. Unauthorised or inactive accounts will return an error response.",
         "responses": {
           "200": {
             "description": "OK"
@@ -73,7 +73,7 @@
           "HealthCheck"
         ],
         "summary": "Health check",
-        "description": "Get the health check status of the server.",
+        "description": "Returns the current health of the server. Returns 'Status OK' via a HTTP 200 response, if healthy.",
         "responses": {
           "200": {
             "description": "OK"
@@ -86,8 +86,8 @@
         "tags": [
           "Scans"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Fetch the users scans",
+        "description": "Retrieves a subset of scans belonging to the authenticated user.\r\nProvide a zero-based start index and record count to retrieve paged results and minimise server load. \r\nA base64 thumbnail image string is also provided instead of the full image data in a multi-record payload.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -120,8 +120,8 @@
         "tags": [
           "Scans"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Fetch the user scan details",
+        "description": "Retrieves the full details of a users scan by its unique ID.\r\nThe full image data is provided as well as other capture and processing details. ",
         "parameters": [
           {
             "name": "id",
@@ -144,8 +144,8 @@
         "tags": [
           "Startup"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Get the startup phase",
+        "description": "Gets the current startup phase of the system.\r\nAfter a new server installation, it can be one of three phases:\r\n0 = NoUserAccounts - unlikely, but possible if an operation to insert the admin account was aborted.\r\n1 = AdminPendingDeactivation - the first operating state of the server. A new admin account must be added to replace the temporary admin account.\r\n2 = AdminDeactivated - the phase after setup completion - a non-admin user account is managing the server and the admin account have been deactivated.",
         "responses": {
           "200": {
             "description": "OK"
@@ -158,8 +158,8 @@
         "tags": [
           "User"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Get user by ID",
+        "description": "Returns a user by their unique identifier.",
         "parameters": [
           {
             "name": "id",
@@ -182,8 +182,8 @@
         "tags": [
           "User"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Add a new user",
+        "description": "Creates a new system user. If this is the first user created by the `admin` account, \r\nthen on success, the administrator account will be made inactive.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -216,8 +216,8 @@
         "tags": [
           "User"
         ],
-        "summary": "TODO",
-        "description": "TODO",
+        "summary": "Update an existing user",
+        "description": "Updates one or more details of an existing system user. A value not supplied will not be updated.\r\nIf the update sets the `IsAdmin` flag to true, then the user calling the API will have their administrator status removed.",
         "requestBody": {
           "content": {
             "application/json": {
