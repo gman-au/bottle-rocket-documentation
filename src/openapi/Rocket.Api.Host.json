@@ -1,0 +1,345 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Rocket.Api.Host | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/capture/process": {
+      "post": {
+        "tags": [
+          "Capture"
+        ],
+        "summary": "Process captured image(s)",
+        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Form": {
+                    "type": "array",
+                    "items": {
+                      "required": [
+                        "key",
+                        "value"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "value": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/connection": {
+      "post": {
+        "tags": [
+          "Connection"
+        ],
+        "summary": "Connection health check (authenticated)",
+        "description": "This endpoint will provide a status of the authenticated connection. Unauthorised or inactive accounts will return an error response.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Health check",
+        "description": "Returns the current health of the server. Returns 'Status OK' via a HTTP 200 response, if healthy.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/scans/fetch": {
+      "post": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Fetch the users scans",
+        "description": "Retrieves a subset of scans belonging to the authenticated user.\r\nProvide a zero-based start index and record count to retrieve paged results and minimise server load. \r\nA base64 thumbnail image string is also provided instead of the full image data in a multi-record payload.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyScansRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/scans/{id}": {
+      "get": {
+        "tags": [
+          "Scans"
+        ],
+        "summary": "Fetch the user scan details",
+        "description": "Retrieves the full details of a users scan by its unique ID.\r\nThe full image data is provided as well as other capture and processing details. ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/startup/phase": {
+      "get": {
+        "tags": [
+          "Startup"
+        ],
+        "summary": "Get the startup phase",
+        "description": "Gets the current startup phase of the system.\r\nAfter a new server installation, it can be one of three phases:\r\n0 = NoUserAccounts - unlikely, but possible if an operation to insert the admin account was aborted.\r\n1 = AdminPendingDeactivation - the first operating state of the server. A new admin account must be added to replace the temporary admin account.\r\n2 = AdminDeactivated - the phase after setup completion - a non-admin user account is managing the server and the admin account have been deactivated.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user by ID",
+        "description": "Returns a user by their unique identifier.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/create": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add a new user",
+        "description": "Creates a new system user. If this is the first user created by the `admin` account, \r\nthen on success, the administrator account will be made inactive.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/update": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update an existing user",
+        "description": "Updates one or more details of an existing system user. A value not supplied will not be updated.\r\nIf the update sets the `IsAdmin` flag to true, then the user calling the API will have their administrator status removed.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDetail"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTheNewAdmin": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MyScansRequest": {
+        "type": "object",
+        "properties": {
+          "startIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recordCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UserDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastLoginAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isAdmin": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Capture"
+    },
+    {
+      "name": "Connection"
+    },
+    {
+      "name": "HealthCheck"
+    },
+    {
+      "name": "Scans"
+    },
+    {
+      "name": "Startup"
+    },
+    {
+      "name": "User"
+    }
+  ]
+}

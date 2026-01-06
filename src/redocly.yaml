@@ -1,0 +1,46 @@
+﻿# NOTE: Only supports options marked as "Supported in Redoc CE"
+# See https://redocly.com/docs/cli/configuration/ for more information.
+
+extends:
+  - recommended
+
+rules:
+  no-unused-components: error
+
+theme:
+  # See https://redocly.com/docs/redoc/config/
+  openapi:
+    disableSearch: true
+    # See https://redocly.com/docs/api-reference-docs/configuration/theming/
+    theme:
+      components:
+        buttons:
+          borderRadius: "8px"
+        httpBadges:
+          borderRadius: "8px"
+        layoutControls:
+          borderRadius: "8px"
+        panels:
+          borderRadius: "8px"
+        tryItButton:
+          borderRadius: "8px"
+        tryItSendButton:
+          borderRadius: "8px"
+      shape:
+        borderRadius: "8px"
+      colors:
+        http:
+          get: '#093624'
+          post: '#2c5f30'
+        primary:
+          main: '#3a881b'
+          dark: '#96F7D0'
+        secondary:
+          main: '#1f6600'
+          dark: '#e2f5db'
+        success:
+          main: '#239543'
+          dark: '#3ecb6b'
+        error:
+          main: '#fe3f60'
+          dark: '#fe3f60'
