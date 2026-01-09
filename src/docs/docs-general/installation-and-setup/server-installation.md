@@ -1,6 +1,16 @@
 ﻿# Server installation
 The following steps outline the installation process for the Bottle Rocket server.
 
+:::warning
+As this is a _self-hosted solution_, the onus of responsibility for securing and isolating your server
+from unwanted or malicious network traffic falls to you, the administrator.
+
+While Bottle Rocket has been developed with security front-of-mind, the very nature of self-hosted solutions
+means that an inexperienced user may inadvertently expose their deployment with deficiencies in security.
+
+Please seek out additional information and/or resources if you are unsure how to deploy this service securely.
+:::
+
 ## Requirements
 ### Docker
 To maximize compatibility, Bottle Rocket is deployed as a 
@@ -75,3 +85,77 @@ docker compose down
 | Variable | Description                                                                                                                                                                                                                                                          |
 | --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |`ApiConfigurationOptions__BaseUrl` | Set this to the relative base URL of the running API image. <br/> You may be able to use `http://127.0.0.1:3001` or `http://localhost:3001` if you deployed the API image standalone as above; otherwise you may need to refer to the running container by its name. |
+
+## Completing setup
+### Extract the root admin account credentials
+Upon initial startup, the API server will perform the following:
+* Connect to the configured MongoDB database
+* Check for the existence of a root `admin` account
+* If the root `admin` account cannot be found, create one with a random password
+
+While the container is running, run the following console / shell command to view the container logs:
+```docker logs <container_name_or_id>```
+
+Where `<container_name_or_id>` is the name or ID of the running API container.
+If this command is successful you should be able to find the following log entries or similar:
+```
+  Checking first-start initialization...
+  FIRST START DETECTED - No active admin account found
+  Creating initial admin account...
+  ================================================================================
+  FIRST START - ADMIN ACCOUNT CREATED
+  ================================================================================
+  Username: admin
+  Password: password123
+  ================================================================================
+  SAVE THESE CREDENTIALS - They will not be shown again!
+  Use these credentials to log in and create your user account.
+  The admin account will be deactivated after you create your first user.
+  ================================================================================
+```
+<small>(for brevity, unnecessary log lines have been omitted)</small>
+
+You now have the credentials for the root `admin` account. 
+You will use these to complete the Bottle Rocket server setup.
+
+### Create your (administrator) account
+* With the UI container running, navigate to the container via the export port you have configured.
+  * In the above example this would be `http://localhost:3000`
+* If everything is running correctly, you should see the Bottle Rocket UI homepage in your browser.
+
+<div class="text--center">
+![Sidebar - logged out](/img/sidebarLoggedOut.png)
+</div>
+
+* Click the **Login** button in the sidebar.
+* You should be presented with a **Login** screen.
+  * Enter the root `admin` username and password you extracted from the API container logs.
+  * Click **Login**.
+
+<div class="text--center">
+![Login form](/img/loginForm.png)
+</div>
+
+* You should now be presented with a **Complete Setup** screen, prompting you to enter your
+new administrator account details.
+
+
+
+<div class="text--center">
+![Complete setup form](/img/completeSetup.png)
+</div>
+
+* Enter the new details as guided (the `Username` field should take the form of an email address).
+
+:::warning
+Note down these credentials as you will need them when configuring the mobile app.
+:::
+
+* Click **Submit**.
+
+:::info
+If successful, after clicking **Submit**, three things will happen:
+* The new administrator account you have configured will be created.
+* The root `admin` account will be deactivated.
+* The `admin` account will log out immediately and you will be returned to the home page.
+:::
