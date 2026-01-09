@@ -1,4 +1,7 @@
-﻿# Server installation
+﻿---
+sidebar_position: 1
+---
+# Server installation
 The following steps outline the installation process for the Bottle Rocket server.
 
 :::warning
