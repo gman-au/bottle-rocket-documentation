@@ -1,3 +1,7 @@
+---
+sidebar_position: 9999
+---
+
 # Privacy Policy
 _Last Updated: December 29, 2025_
 
