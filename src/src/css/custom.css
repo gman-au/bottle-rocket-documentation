@@ -27,6 +27,9 @@ body {
     --ifm-navbar-background-color: #9dcc8e;
     --ifm-heading-font-weight: 500;
 
+    --ifm-color-secondary-dark: #2c7073;
+    --ifm-color-secondary-contrast-background: #a3d9dc;
+
     .hero--rocket {
         --ifm-hero-background-color: #9dcc8e88;
         --ifm-hero-text-color: #2c5f30;
@@ -48,6 +51,8 @@ body {
     --ifm-font-color-base: #ffffffd0;
     --ifm-navbar-background-color: #2c5f30;
     --ifm-heading-font-weight: 500;
+
+    --ifm-color-secondary-contrast-background: #174345;
 
     .hero--rocket {
         --ifm-hero-background-color: #2c5f3088;
