@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v0.0.6.alpha"
+    "version": "v0.0.7.alpha"
   },
   "paths": {
     "/api/capture/process": {
@@ -39,6 +39,12 @@
                         }
                       }
                     }
+                  },
+                  "qr_code": {
+                    "type": "string"
+                  },
+                  "qr_bounding_box": {
+                    "type": "string"
                   }
                 }
               }
