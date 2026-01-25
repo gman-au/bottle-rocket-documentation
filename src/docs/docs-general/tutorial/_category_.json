@@ -1,0 +1,8 @@
+{
+  "label": "Tutorial",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "A Bottle Rocket tutorial with a use case."
+  }
+}
