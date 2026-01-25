@@ -1,4 +1,4 @@
-﻿# Viewing My Scans
+﻿# Viewing Your Scans
 
 Bottle Rocket uses local storage to store copies of scanned images received via the Bottle Rocket app.
 
