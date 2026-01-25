@@ -10,7 +10,7 @@ The Bottle Rocket app is currently only available on Android.
 
 ## Play Store (recommended)
 You can install the Bottle Rocket app from the 
-[Play Store](https://play.google.com/store/apps/details?id=com.bottlerocketstudios.android.bottlerocket).
+[Play Store](https://play.google.com/store/apps/details?id=au.com.gman.bottlerocket).
 If you do so, you will require an active Play Store account.
 
 ## Direct APK installation
