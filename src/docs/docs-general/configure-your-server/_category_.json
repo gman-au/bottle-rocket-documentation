@@ -1,0 +1,8 @@
+{
+  "label": "Configure your server",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Full instructions for configuring your Bottle Rocket server."
+  }
+}
