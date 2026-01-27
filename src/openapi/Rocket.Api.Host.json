@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v0.1.0.alpha"
+    "version": "v0.1.3.alpha"
   },
   "paths": {
     "/api/capture/process": {
@@ -768,6 +768,97 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/notion/workflows/getParentNotes": {
+      "post": {
+        "tags": [
+          "Manage connectors"
+        ],
+        "summary": "Get all parent notes accessible via a Notion connector",
+        "description": "Retrieves a set of (permitted) parent notes for the given Notion connector.\n\nThe notes that a Notion integration has access to are explicitly defined in the Notion integration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
                 }
               }
             }
@@ -3161,6 +3252,35 @@
           }
         }
       },
+      "GetAllNotionParentNotesRequest": {
+        "type": "object",
+        "properties": {
+          "connector_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetAllNotionParentNotesResponse": {
+        "type": "object",
+        "properties": {
+          "parent_notes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NotionParentNoteSummary"
+            },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "MyScansRequest": {
         "type": "object",
         "properties": {
@@ -3237,6 +3357,19 @@
             "format": "int32"
           },
           "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NotionParentNoteSummary": {
+        "type": "object",
+        "properties": {
+          "parent_note_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "parent_note_name": {
             "type": "string",
             "nullable": true
           }
