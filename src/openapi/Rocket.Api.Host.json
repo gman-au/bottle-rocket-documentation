@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v0.1.3.alpha"
+    "version": "v0.1.5.alpha"
   },
   "paths": {
     "/api/capture/process": {
@@ -768,6 +768,97 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/microsoft/connectors/initiate": {
+      "post": {
+        "tags": [
+          "Manage connectors"
+        ],
+        "summary": "Initiate a Microsoft authentication request",
+        "description": "Initiates a Microsoft authentication request for the given user, client, and tenant ID.\n\nThe API will return a verification URL and user code that can be supplied back to the user\nto complete the authentication process.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MicrosoftAuthInitiateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MicrosoftAuthInitiateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MicrosoftAuthInitiateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAuthInitiateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAuthInitiateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAuthInitiateResponse"
                 }
               }
             }
@@ -1837,6 +1928,97 @@
         }
       }
     },
+    "/api/users/darkMode": {
+      "post": {
+        "tags": [
+          "Manage users"
+        ],
+        "summary": "Set dark mode preference for a user",
+        "description": "Sets the dark mode preference for a given user.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUserDarkModeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUserDarkModeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetUserDarkModeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/workflows/fetch": {
       "post": {
         "tags": [
@@ -2633,6 +2815,97 @@
           }
         }
       }
+    },
+    "/api/microsoft/workflows/getOneNoteSections": {
+      "post": {
+        "tags": [
+          "Manage workflows"
+        ],
+        "summary": "Get all OneNote sections accessible via a Microsoft connector",
+        "description": "Retrieves a set of (permitted) note sections for the given Microsoft connector.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOneNoteSectionsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOneNoteSectionsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOneNoteSectionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNoteSectionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNoteSectionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneNoteSectionsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2660,6 +2933,9 @@
           "role": {
             "type": "string",
             "nullable": true
+          },
+          "dark_mode": {
+            "type": "boolean"
           },
           "error_code": {
             "type": "integer",
@@ -3281,6 +3557,94 @@
           }
         }
       },
+      "GetOneNoteSectionsRequest": {
+        "type": "object",
+        "properties": {
+          "connector_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetOneNoteSectionsResponse": {
+        "type": "object",
+        "properties": {
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OneNoteSection"
+            },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MicrosoftAuthInitiateRequest": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenant_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MicrosoftAuthInitiateResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/MicrosoftDeviceCodeResult"
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "MicrosoftDeviceCodeResult": {
+        "type": "object",
+        "properties": {
+          "user_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "device_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "verification_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "expires_in": {
+            "type": "number",
+            "format": "double"
+          },
+          "interval": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
       "MyScansRequest": {
         "type": "object",
         "properties": {
@@ -3370,6 +3734,19 @@
             "nullable": true
           },
           "parent_note_name": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OneNoteSection": {
+        "type": "object",
+        "properties": {
+          "section_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "section_name": {
             "type": "string",
             "nullable": true
           }
@@ -3498,6 +3875,14 @@
           }
         }
       },
+      "SetUserDarkModeRequest": {
+        "type": "object",
+        "properties": {
+          "dark_mode": {
+            "type": "boolean"
+          }
+        }
+      },
       "StartupPhaseResponse": {
         "type": "object",
         "properties": {
@@ -3593,6 +3978,9 @@
           "new_password": {
             "type": "string",
             "nullable": true
+          },
+          "dark_mode": {
+            "type": "boolean"
           },
           "error_code": {
             "type": "integer",
