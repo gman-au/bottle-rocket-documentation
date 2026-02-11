@@ -15,6 +15,12 @@ which should be sufficient for most use cases.
   
 ## Create the project in Google Cloud
 
+:::tip
+If you have already created a GCP project as part of a
+[Google Drive upload workflow](/docs/docs-general/workflow-integrations/google-drive),
+you can use this project instead of creating a new one.
+:::
+
 * In the Google Cloud console, select **Create or select a project**.
 * Enter a **Project name**, select a **Location**, and click **Create**.
 
@@ -55,6 +61,10 @@ which should be sufficient for most use cases.
 
 * Click **Create** to download the private key.
 
+:::danger
+Treat this private key file like a password - keep it secure, private, and do not share it with anyone.
+:::
+
 ## Upload the private key file to the GCP Bottle Rocket Connector
 
 * Login to your Bottle Rocket server.
@@ -67,7 +77,7 @@ which should be sufficient for most use cases.
 * Select the **Google Cloud Platform Connector** from the list of connectors, and click the **Add connector** button.
 
 <div class="text--center">
-![Add workflow](/img/gcp/uploadKeyFile.png)
+![Add workflow](/img/gcp/uploadKeyFileGcp.png)
 </div>
 
 * Click on the paperclip / attachment button, and upload the private key file you downloaded from Google Cloud.
