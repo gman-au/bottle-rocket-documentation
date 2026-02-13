@@ -40,6 +40,21 @@ before you can connect to it.
 * Tap the **Settings** option.
 * You should be presented with a settings screen.
 
+### Add the user account via QR code
+
+* To connect a user account to the app via a QR code, select the **Scan QR code** option.
+
+<div class="text--center">
+![Settings - Scan QR](/img/settingScanQrCode.png)
+</div>
+
+* You should be presented with a QR code scanner screen.
+* Scan the QR code displayed during the 
+[update of the user account on your server](/docs/docs-general/installation-and-setup/server-installation/qr-code-authentication#getting-a-qr-code-for-a-user-account).
+* If successful, the app should pre-fill the details as shown below.
+
+### Add the user account manually
+
 <div class="text--center">
 ![Mobile app - settings menu](/img/mobileSettingsScreen.png)
 </div>
@@ -53,12 +68,17 @@ before you can connect to it.
   * The **User name** should correspond to the user name you configured as part of the setup process.
   * The **Password** should correspond to the password you configured as part of the setup process.
 
+:::warning
+Do not use the root `admin` credentials here, as certain functionality will not work correctly.
+:::
+
+### Test and save connection
 * Use the **Test connection** button to verify that the connection is working correctly with the supplied credentials.
 * Use the **Save** button to save the connection configuration.
 * Use the **Go back** button to return to the main menu (and lose any unsaved changes).
 
-:::warning
-Do not use the root `admin` credentials here, as certain functionality will not work correctly.
+:::note
+When you save the connection configuration, you will be prompted to restart the app.
 :::
 
 If everything is working correctly and you can successfully test the server connection, then everything should be good
