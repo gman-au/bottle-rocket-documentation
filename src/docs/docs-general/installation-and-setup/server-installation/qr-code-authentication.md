@@ -50,4 +50,4 @@ pop-up dialog with the QR code on it.
 </div>
 
 * Keep this page open, and continue to the client app installation to 
-[scan the QR code](/docs/docs-general/installation-and-setup/client-installation#create-your-administrator-account).
+[scan the QR code](/docs/docs-general/installation-and-setup/client-installation#add-the-user-account-via-qr-code).
