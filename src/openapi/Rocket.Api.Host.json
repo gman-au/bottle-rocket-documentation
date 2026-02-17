@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v0.1.6.alpha"
+    "version": "v0.1.7.alpha"
   },
   "paths": {
     "/api/capture/process": {
@@ -2025,7 +2025,7 @@
           "Manage users"
         ],
         "summary": "Update an existing user",
-        "description": "Updates one or more details of an existing system user. A value not supplied will not be updated.\n\nIf the update sets the `IsAdmin` flag to true, then the user calling the API will have their administrator status removed.",
+        "description": "Updates one or more details of an existing system user. A value not supplied will not be updated.\n\nIf the update sets the `IsAdmin` flag to true, then the user calling the API will have their administrator status removed.\n\nIf a new password has been supplied (and only if so), the response will contain a QR code that the mobile app can scan to provide their credentials.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3289,6 +3289,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "qr_code_base64": {
+            "type": "string",
+            "nullable": true
+          },
           "error_code": {
             "type": "integer",
             "format": "int32"
@@ -4128,6 +4132,10 @@
       "UpdateUserResponse": {
         "type": "object",
         "properties": {
+          "qr_code_base64": {
+            "type": "string",
+            "nullable": true
+          },
           "error_code": {
             "type": "integer",
             "format": "int32"
