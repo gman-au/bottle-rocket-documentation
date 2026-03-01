@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v0.1.10.alpha"
+    "version": "v0.1.15.alpha"
   },
   "paths": {
     "/api/capture/process": {
@@ -241,6 +241,85 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ScanSpecifics"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Manage captures / scans"
+        ],
+        "summary": "Archive a scan",
+        "description": "Manually archives a scan by its unique ID.\n\nTo preserve drive space, the original image file is permanently deleted and will no longer be available\nfor workflow processing. A stubbed record will remain with a small thumbnail image for reference.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
                 }
               }
             }
@@ -1210,6 +1289,97 @@
         }
       }
     },
+    "/api/notion/workflows/getDataSources": {
+      "post": {
+        "tags": [
+          "Manage connectors"
+        ],
+        "summary": "Get all data sources accessible via a Notion connector",
+        "description": "Retrieves a set of (permitted) data sources for the given Notion connector.\n\nThe data sources that a Notion integration has access to are explicitly defined in the Notion integration.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllNotionParentNotesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/executions/fetch": {
       "post": {
         "tags": [
@@ -1669,6 +1839,168 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserSpecifics"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/globalSettings/get": {
+      "get": {
+        "tags": [
+          "Manage server"
+        ],
+        "summary": "Get global settings",
+        "description": "Returns the current global system settings.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/globalSettings/update": {
+      "post": {
+        "tags": [
+          "Manage server"
+        ],
+        "summary": "Update global settings",
+        "description": "Updates the global system settings. Services that are driven by global system configuration will be restarted e.g. sweeping jobs.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlobalSettingsSpecifics"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
                 }
               }
             }
@@ -3029,6 +3361,97 @@
         }
       }
     },
+    "/api/google/workflows/getFolders": {
+      "post": {
+        "tags": [
+          "Manage workflows"
+        ],
+        "summary": "Get all Google Drive folders accessible via a Google connector",
+        "description": "Retrieves a set of (permitted) folders for the given Google connector.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetGoogleDriveFoldersRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetGoogleDriveFoldersRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetGoogleDriveFoldersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGoogleDriveFoldersResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGoogleDriveFoldersResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGoogleDriveFoldersResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/microsoft/workflows/getOneNoteSections": {
       "post": {
         "tags": [
@@ -3529,6 +3952,9 @@
             "type": "string",
             "nullable": true
           },
+          "archived": {
+            "type": "boolean"
+          },
           "steps": {
             "type": "array",
             "items": {
@@ -3774,6 +4200,43 @@
           }
         }
       },
+      "GetGoogleDriveFoldersRequest": {
+        "type": "object",
+        "properties": {
+          "connector_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetGoogleDriveFoldersResponse": {
+        "type": "object",
+        "properties": {
+          "folders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GoogleDriveFolder"
+            },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "GetOneNoteSectionsRequest": {
         "type": "object",
         "properties": {
@@ -3791,6 +4254,28 @@
             "items": {
               "$ref": "#/components/schemas/OneNoteSection"
             },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GlobalSettingsSpecifics": {
+        "type": "object",
+        "properties": {
+          "sweep_successful_scans_after_days": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "enable_sweeping": {
+            "type": "boolean",
             "nullable": true
           },
           "error_code": {
@@ -3841,6 +4326,19 @@
             "format": "int32"
           },
           "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GoogleDriveFolder": {
+        "type": "object",
+        "properties": {
+          "folder_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "folder_name": {
             "type": "string",
             "nullable": true
           }
@@ -4104,6 +4602,9 @@
             "type": "string",
             "nullable": true
           },
+          "archived": {
+            "type": "boolean"
+          },
           "error_code": {
             "type": "integer",
             "format": "int32"
@@ -4318,7 +4819,15 @@
             "type": "string",
             "nullable": true
           },
+          "output_type": {
+            "type": "integer",
+            "format": "int32"
+          },
           "step_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "step_code": {
             "type": "string",
             "nullable": true
           },
@@ -4363,7 +4872,15 @@
             "type": "string",
             "nullable": true
           },
+          "output_type": {
+            "type": "integer",
+            "format": "int32"
+          },
           "step_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "step_code": {
             "type": "string",
             "nullable": true
           },
