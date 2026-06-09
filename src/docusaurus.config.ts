@@ -7,7 +7,7 @@ import type * as Redocusaurus from 'redocusaurus';
 
 const config: Config = {
     title: 'Bottle Rocket',
-    tagline: 'Self-hosted, Rocketbook-compatible document scanning and management',
+    tagline: 'Self-hosted document scanning and management with multi-format compatibility',
     favicon: 'img/bottle-rocket-logo.svg',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

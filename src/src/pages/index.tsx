@@ -4,8 +4,9 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import GooglePlayBadge from '@site/static/img/google-play-badge.png';
+import ScribzeeLogo from '@site/static/img/scribzeeLogo.png';
+import RocketbookLogo from '@site/static/img/rocketbookLogo.png';
 import Heading from '@theme/Heading';
-
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -25,6 +26,16 @@ function HomepageHeader() {
     );
 }
 
+function CompanyLogos() {
+    return (
+
+        <div className={styles.companyLogos}>
+            <img src={RocketbookLogo} alt="Rocketbook Logo"/>
+            <img src={ScribzeeLogo} alt="Scribzee Logo"/>
+        </div>
+    )
+}
+
 export default function Home(): ReactNode {
     const {siteConfig} = useDocusaurusContext();
     return (
@@ -33,6 +44,7 @@ export default function Home(): ReactNode {
             description="Bottle Rocket documentation site">
             <HomepageHeader/>
             <main>
+                <CompanyLogos/>
                 <HomepageFeatures/>
             </main>
         </Layout>

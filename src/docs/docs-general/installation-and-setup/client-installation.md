@@ -1,5 +1,5 @@
 ﻿---
-sidebar_position: 2
+sidebar_position: 3
 ---
 # Mobile app installation
 The following steps outline the installation process for the Bottle Rocket client (mobile app).
