@@ -53,7 +53,7 @@ const config: Config = {
             {
                 specs: [
                     {
-                        spec: 'openapi/Rocket.Api.Host.json',
+                        spec: 'openapi/Rocket.Api.Host.OpenApi.json',
                         route: '/api/',
                     },
                 ],
