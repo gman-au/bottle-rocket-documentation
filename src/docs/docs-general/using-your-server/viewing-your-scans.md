@@ -18,7 +18,13 @@ should appear here.
 ![My Scans](/img/myScansOverview.png)
 </div>
 
-* To view the details of a specific scan, click on the **Details** link under the related scan.
+* To view the options for a specific scan, click on the **...** button under the related scan.
+  * Select **Details** to navigate to the scan details page.
+  * Select **Delete** to delete this scan from your server.
+
+:::danger
+Deletion is **permanent** and cannot be undone.
+:::
 
 <div class="text--center">
 ![My Scans](/img/scanDetailsOverview.png)
