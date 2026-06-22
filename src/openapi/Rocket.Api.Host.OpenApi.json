@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v1.0.3.1"
+    "version": "v1.0.3.3"
   },
   "paths": {
     "/api/capture/process": {
@@ -289,7 +289,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/scans/archive/{id}": {
       "delete": {
         "tags": [
           "Manage captures / scans"
@@ -312,6 +314,26 @@
             "content": {
               "text/plain": {
                 "schema": {
+                  "$ref": "#/components/schemas/ArchiveScanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveScanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveScanResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               },
@@ -323,6 +345,67 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scans/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Manage captures / scans"
+        ],
+        "summary": "(Permanently) delete a scan",
+        "description": "Permanently and completely deletes a scan by its unique ID.\n\nAll traces of the scan, including prior executions, will be removed. The image file is deleted from the working folder.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteScanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteScanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteScanResponse"
                 }
               }
             }
@@ -3562,6 +3645,22 @@
           }
         }
       },
+      "ArchiveScanResponse": {
+        "type": "object",
+        "properties": {
+          "is_archived": {
+            "type": "boolean"
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "ConnectionTestResponse": {
         "type": "object",
         "properties": {
@@ -3818,6 +3917,19 @@
             "type": "string",
             "nullable": true
           },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DeleteScanResponse": {
+        "type": "object",
+        "properties": {
           "error_code": {
             "type": "integer",
             "format": "int32"
