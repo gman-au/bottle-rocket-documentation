@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v1.0.3.3"
+    "version": "v1.0.3.4"
   },
   "paths": {
     "/api/capture/process": {
@@ -477,6 +477,77 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ConnectionTestResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/dashboard": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Get a dashboard snapshot",
+        "description": "Retrieves a snapshot of the current Bottle Rocket dashboard for the given user.\n\nIncludes metrics on workflows, scans, and drive space.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchDashboardResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchDashboardResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchDashboardResponse"
                 }
               }
             }
@@ -3675,6 +3746,10 @@
           "dark_mode": {
             "type": "boolean"
           },
+          "current_language": {
+            "type": "string",
+            "nullable": true
+          },
           "error_code": {
             "type": "integer",
             "format": "int32"
@@ -4130,6 +4205,28 @@
           }
         }
       },
+      "FetchDashboardResponse": {
+        "type": "object",
+        "properties": {
+          "scans": {
+            "$ref": "#/components/schemas/ScansResponse"
+          },
+          "storage": {
+            "$ref": "#/components/schemas/StorageResponse"
+          },
+          "lifecycle": {
+            "$ref": "#/components/schemas/LifecycleResponse"
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "FetchExecutionsRequest": {
         "type": "object",
         "properties": {
@@ -4398,6 +4495,10 @@
             "format": "int32",
             "nullable": true
           },
+          "default_language": {
+            "type": "string",
+            "nullable": true
+          },
           "error_code": {
             "type": "integer",
             "format": "int32"
@@ -4461,6 +4562,36 @@
           "folder_name": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "LifecycleResponse": {
+        "type": "object",
+        "properties": {
+          "lifecycles_by_group": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LifecycleTotalSpecifics"
+            },
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
+      "LifecycleTotalSpecifics": {
+        "type": "object",
+        "properties": {
+          "workflow": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -4686,6 +4817,19 @@
           }
         }
       },
+      "ScanByVendorTotalSpecifics": {
+        "type": "object",
+        "properties": {
+          "vendor": {
+            "type": "string",
+            "nullable": true
+          },
+          "scans": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "ScanSpecifics": {
         "type": "object",
         "properties": {
@@ -4739,6 +4883,24 @@
           }
         }
       },
+      "ScansResponse": {
+        "type": "object",
+        "properties": {
+          "total_scans_received": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scans_received_by_vendor": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanByVendorTotalSpecifics"
+            },
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
       "ScanSummary": {
         "type": "object",
         "properties": {
@@ -4784,6 +4946,30 @@
             "nullable": true
           }
         }
+      },
+      "StorageResponse": {
+        "type": "object",
+        "properties": {
+          "used_storage_bytes": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "used_storage_friendly": {
+            "type": "string",
+            "nullable": true
+          },
+          "available_storage_bytes": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "available_storage_friendly": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "nullable": true
       },
       "UpdateUserResponse": {
         "type": "object",
