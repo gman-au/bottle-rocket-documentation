@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v1.0.3.4"
+    "version": "v2.0.0.0"
   },
   "paths": {
     "/api/capture/process": {
@@ -11,7 +11,7 @@
           "Manage captures / scans"
         ],
         "summary": "Process captured image(s)",
-        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.\n\nThe app will automatically provide matched template information as part of automated workflow triggering, but\nif you wish to simply upload a captured image to the system and trigger a manual workflow, the qr_code and qr_bounding_box\nparameters can be omitted.",
+        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.\n\nYou can bind this scanned image to one or more workflows using the workflows parameter.\n\nIf you wish to simply upload a captured image to the system and trigger a manual workflow, the qr_code and qr_bounding_box\nparameters can be omitted.",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
@@ -40,14 +40,14 @@
                       }
                     }
                   },
-                  "qr_code": {
-                    "type": "string"
-                  },
-                  "qr_bounding_box": {
-                    "type": "string"
-                  },
                   "vendor": {
                     "type": "string"
+                  },
+                  "workflows": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -2205,77 +2205,6 @@
         }
       }
     },
-    "/api/pageTemplates": {
-      "get": {
-        "tags": [
-          "Manage page templates"
-        ],
-        "summary": "Fetch the page templates",
-        "description": "Retrieves all page template currently configured in the system.\n\nTypically this would not be called regularly as it is used by client apps to know which QR codes to look out for.\n\nIf you have added custom page templates to your system, they will be returned here. ",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/FetchPageTemplatesResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FetchPageTemplatesResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FetchPageTemplatesResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/users/fetch": {
       "post": {
         "tags": [
@@ -3937,11 +3866,6 @@
       "CreateWorkflowRequest": {
         "type": "object",
         "properties": {
-          "matching_page_symbol": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -4110,11 +4034,6 @@
             "type": "string",
             "nullable": true
           },
-          "matching_page_symbol": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -4150,6 +4069,10 @@
             "items": {
               "$ref": "#/components/schemas/ExecutionStepSummary"
             },
+            "nullable": true
+          },
+          "vendor": {
+            "type": "string",
             "nullable": true
           },
           "error_code": {
@@ -4263,26 +4186,6 @@
           "total_records": {
             "type": "integer",
             "format": "int32"
-          },
-          "error_code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "error_message": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "FetchPageTemplatesResponse": {
-        "type": "object",
-        "properties": {
-          "templates": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PageTemplateSummary"
-            },
-            "nullable": true
           },
           "error_code": {
             "type": "integer",
@@ -4581,6 +4484,10 @@
       "LifecycleTotalSpecifics": {
         "type": "object",
         "properties": {
+          "vendor": {
+            "type": "string",
+            "nullable": true
+          },
           "workflow": {
             "type": "string",
             "nullable": true
@@ -4702,11 +4609,6 @@
             "type": "string",
             "nullable": true
           },
-          "matching_page_symbol": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -4756,19 +4658,6 @@
             "nullable": true
           },
           "section_name": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "PageTemplateSummary": {
-        "type": "object",
-        "properties": {
-          "qr_code": {
-            "type": "string",
-            "nullable": true
-          },
-          "book_vendor": {
             "type": "string",
             "nullable": true
           }
@@ -4834,6 +4723,10 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
             "type": "string",
             "nullable": true
           },
@@ -4905,6 +4798,10 @@
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
             "type": "string",
             "nullable": true
           },
