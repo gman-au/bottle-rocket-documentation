@@ -5,7 +5,6 @@ This tutorial will walk you through an example Bottle Rocket use case involving:
 
 * Set up of two connectors (Dropbox and Ollama)
 * Running a basic workflow using the connectors
-* Set up the workflow to trigger on a matched page symbol
 * Triggering the workflow from the mobile app
 
 ## Prerequisites
@@ -36,7 +35,7 @@ We are going to build a workflow that takes an image capture, and:
 </div>
 
 * Name the workflow **Send image and text to Dropbox**.
-* In the **Workflow Details** page, set the **Matching Page Symbol** to "Rocket", and click **Submit**.
+* Click **Submit** to add the workflow.
 
 <div class="text--center">
 ![Set rocket symbol](/img/matchingPageSymbol.png)
@@ -76,12 +75,6 @@ Your workflow is now ready to run / trigger.
 
 ### Scan an image using the mobile app
 
-* To test the workflow, take a Rocketbook page and cross out the "Rocket" symbol.
-
-<div class="text--center">
-![Cross out rocket symbol](/img/crossedOutRocket.jpg)
-</div>
-
 * Open the Bottle Rocket mobile app and select **Begin Capture**.
 
 <div class="text--center">
@@ -95,11 +88,30 @@ Your workflow is now ready to run / trigger.
 </div>
 
 * Once the scan is complete, you should be presented with the scan preview. If you are happy with the image,
-select the forward / send button (on the right side) to send the image to your Bottle Rocket server.
+select the next (right) arrow button to proceed to the confirmation screen.
 
 <div class="text--center">
 ![Preview scan page](/img/previewScanPage.png)
 </div>
+
+forward / send button (on the right side) to send the image to your Bottle Rocket server.
+
+### Confirm the workflow
+* The confirmation message will appear, allowing you to select one or more _workflows_ to run for this scan. Tap to highlight and select them.
+* In this example, the *Send image and text to Dropbox* workflow we created earlier should appear in the list; select it.
+* Tap the Send icon to send the scan to your Bottle Rocket server.
+
+<div class="text--center">
+![Preview scan page](/img/tutorialSelectWorkflow.png)
+</div>
+
+:::tip
+You do not **need** to select a workflow. 
+
+If you send the image without a workflow, the scan will simply be backed up to your Bottle Rocket server.
+
+You can even manually run a workflow from the server later.
+:::
 
 ### View the scan
 * Login to your Bottle Rocket server.

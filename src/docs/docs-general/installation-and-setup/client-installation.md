@@ -42,7 +42,7 @@ before you can connect to it.
 
 ### Add the user account via QR code
 
-* To connect a user account to the app via a QR code, select the **Scan QR code** option.
+* To connect a user account to the app via a QR code, select the **Scan Login QR code** option.
 
 <div class="text--center">
 ![Settings - Scan QR](/img/settingScanQrCode.png)

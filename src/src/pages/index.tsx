@@ -6,6 +6,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import GooglePlayBadge from '@site/static/img/google-play-badge.png';
 import ScribzeeLogo from '@site/static/img/scribzeeLogo.png';
 import RocketbookLogo from '@site/static/img/rocketbookLogo.png';
+import InstructionStepsImage from '@site/static/img/instructionSteps.webp';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
@@ -18,10 +19,19 @@ function HomepageHeader() {
                     {siteConfig.title}
                 </Heading>
                 <p className="hero__subtitle">{siteConfig.tagline}</p>
+                <div>
+                    <div className="container">
+                        <InstructionSteps/>
+                    </div>
+                    <div>
                 <a target={"_blank"} href={"https://play.google.com/store/apps/details?id=au.com.gman.bottlerocket"}>
                     <img style={{maxHeight: "140px"}} src={GooglePlayBadge} alt="Get it on Google Play"/>
                 </a>
+                    </div>
+
+                </div>
             </div>
+
         </header>
     );
 }
@@ -33,6 +43,12 @@ function CompanyLogos() {
             <img src={RocketbookLogo} alt="Rocketbook Logo"/>
             <img src={ScribzeeLogo} alt="Scribzee Logo"/>
         </div>
+    )
+}
+
+function InstructionSteps() {
+    return (
+            <img style={{borderRadius: "10px"}} src={InstructionStepsImage} alt="Instruction Steps"/>
     )
 }
 
