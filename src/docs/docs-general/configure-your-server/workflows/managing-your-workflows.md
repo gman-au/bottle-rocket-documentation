@@ -27,9 +27,7 @@ sidebar_position: 2
 
 * The left-hand form on the main page contains the top-level workflow details:
     * The **Workflow Name**, which can be changed to any name (again, it must be unique)
-    * The **Matching Page Symbol**, through which you can assign
-      a [matching page symbol](/docs/docs-general/configure-your-server/workflows/seven-symbols) to the workflow.
-* To save either of the above, click **Submit** after making the changes.
+* To save the above, click **Submit** after making the changes.
 
 ## The workflow editor
 
