@@ -1,4 +1,8 @@
-﻿# Diagnostic / test steps
+﻿---
+sidebar_position: 3
+---
+
+# Diagnostic / test steps
 
 ## Overview
 When building a workflow, you will often work with steps involving one or more connectors (AI / email / cloud storage) 
