@@ -109,3 +109,39 @@ to be specified - however, you do **not** need to provide this right now.
 :::warning
 Deleting a workflow step will also delete **all** descendant workflow steps associated with it.
 :::
+
+## Cloning an existing workflow
+Rather than completely rebuilding them, complex workflows can be cloned into new workflows and then tweaked / tuned
+with small adjustments.
+
+* Login to your Bottle Rocket server.
+* On the left-hand sidebar, under **My workflows**, select **Manage my workflows**.
+
+<div class="text--center">
+![Manage workflow](/img/sidebarManageWorkflows.png)
+</div>
+
+* You will see a list of the existing workflows that you have created.
+* Select a workflow and click on the three vertical dots context menu on the right-hand side.
+
+<div class="text--center">
+![Manage workflow](/img/workflowContextMenu.png)
+</div>
+
+* Select **Clone**. You will be taken to the Clone Workflow page.
+
+<div class="text--center">
+![Manage workflow](/img/cloneWorkflowForm.png)
+</div>
+
+* You will be prompted to enter a name for your workflow. Enter a name and click **Submit**.
+  :::note
+  A given workflow must have a unique name.
+  :::
+* Once saved, you will be taken to the workflow editor page for the cloned workflow. 
+* The steps all of their configurations will be copied across to this workflow, allowing you to make
+adjustments as needed, without affecting the original workflow.
+
+<div class="text--center">
+![Workflow details](/img/clonedResult.png)
+</div>
