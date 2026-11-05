@@ -1,8 +1,12 @@
 ﻿---
-sidebar_position: 1
+sidebar_position: 2
 ---
 # Server installation
 The following steps outline the installation process for the Bottle Rocket server.
+
+:::danger
+Make sure you have [set up a master key](../setting-your-master-key.md) before continuing!
+:::
 
 :::warning
 As this is a _self-hosted solution_, the onus of responsibility for securing and isolating your server
@@ -83,6 +87,13 @@ docker compose down
 |`JWT_AUTH_SECRET` | *Optional* | This value is used as the [JWT signing key](https://en.wikipedia.org/wiki/JSON_Web_Token) for the API tokens issued by your server. <br/>You do not *need* to specify it, however, if it is not supplied, then API tokens will be invalidated between server restarts. |
 |`JWT_ACCESS_EXPIRY_SECONDS` | *Optional* | Set this value to the expiry time, in seconds, of API access tokens (default is 10 minutes). |
 |`JWT_REFRESH_EXPIRY_SECONDS` | *Optional* | Set this value to the expiry time, in seconds, of API refresh tokens (default is 30 days). |
+|`BOTTLE_ROCKET_MASTER_KEY` | *Optional** | Set this value to the [master key you have set up](../setting-your-master-key.md) in the previous step. |
+|`BOTTLE_ROCKET_KEY_PATH` | *Optional** | Set this to the file path on the local filesystem (where the server is running) to read / write the master key file. <br/>By default, Bottle Rocket writes a key file to `/app/config/master.key` if the `BOTTLE_ROCKET_MASTER_KEY` is not supplied; you can mount a Docker volume to this folder if you want to copy / retain the key file. |
+
+:::danger
+If `BOTTLE_ROCKET_MASTER_KEY` is not supplied, the server will generate a random key, and write it to a file inside the running container - **this will be permanently lost** if you delete the container, 
+making some data irrecoverable unless you have it backed up.
+::: 
 
 ### Running the UI image (standalone)
 #### Port configuration
