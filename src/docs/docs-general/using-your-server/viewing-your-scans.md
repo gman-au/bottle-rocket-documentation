@@ -34,7 +34,7 @@ Deletion is **permanent** and cannot be undone.
 The details screen contains the entire set of scans for a given batch.
 
 <div class="text--center">
-![My Scans](/img/scanDetailsOverview.png)
+![Scan Details](/img/scanDetailsOverview.png)
 </div>
 
 For each scanned image:
