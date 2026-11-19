@@ -1,4 +1,7 @@
-﻿# Microsoft (OneDrive and OneNote)
+﻿---
+description: "Store notes as files or notes via Microsoft services"
+---
+# Microsoft (OneDrive and OneNote)
 
 ## Overview
 
