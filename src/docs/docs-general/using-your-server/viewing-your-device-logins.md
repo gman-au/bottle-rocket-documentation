@@ -28,6 +28,12 @@ As a user, you can view these sessions and revoke them, if required.
 ![My Scans](/img/confirmRevokeSession.png)
 </div>
 
+* You can also revoke *all* of the other sessions by clicking the **Revoke all** button at the top of the screen.
+
+<div class="text--center">
+![My Scans](/img/confirmRevokeAllSessions.png)
+</div>
+
 * When prompted, click the **Revoke** button to confirm and terminate the given session.
 
 :::danger

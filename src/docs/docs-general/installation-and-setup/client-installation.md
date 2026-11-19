@@ -34,7 +34,7 @@ before you can connect to it.
 * You should be presented with a main menu / landing screen.
 
 <div class="text--center">
-![Mobile app - landing menu](/img/mobileLandingScreen.png)
+![Mobile app - landing menu](/img/mobileConnectScreen.png)
 </div>
 
 * Tap the **Settings** option.
