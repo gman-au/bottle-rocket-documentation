@@ -1,4 +1,7 @@
-﻿# Capturing documents
+﻿---
+description: "It's time to start capturing!"
+---
+# Capturing documents
 
 After [installing and configuring the app](../installation-and-setup/client-installation.md) on your device, it's time to start capturing
 documents!

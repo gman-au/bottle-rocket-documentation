@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 1
+description: "Use workflows to auto-suggest titles for documents and sections"
 ---
 # Automatic file naming
 

@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 3
+description: "Installing and configuring the Bottle Rocket mobile app"
 ---
 # Mobile app installation
 The following steps outline the installation process for the Bottle Rocket client (mobile app).

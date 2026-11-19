@@ -1,4 +1,7 @@
-﻿# Notion
+﻿---
+description: "Send data in various formats as Notion notes"
+---
+# Notion
 
 ## Overview
 [Notion](https://www.notion.com/) is a cloud-based knowledge management platform 

@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 1
+description: "Viewing and managing scans captured by the Bottle Rocket app"
 ---
 # Viewing your scans
 

@@ -1,4 +1,7 @@
-﻿# Google Cloud Vision
+﻿---
+description: "Use GCV tools to extract text from scans"
+---
+# Google Cloud Vision
 
 ## Overview
 [Google Cloud Vision](https://cloud.google.com/vision) offers a comprehensive set of machine vision tools which you may find useful for 

@@ -1,4 +1,7 @@
-﻿# Dropbox
+﻿---
+description: "Upload files to the Dropbox cloud service"
+---
+# Dropbox
 
 ## Overview
 [Dropbox](https://learn.dropbox.com/self-guided-learning/dropbox-fundamentals-course/fundamentals-what-is-dropbox)
