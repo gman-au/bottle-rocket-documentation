@@ -1,4 +1,7 @@
-﻿# Replicate
+﻿---
+description: "Connect to Replicate models for advanced note processing tasks"
+---
+# Replicate
 
 ## Overview
 [Replicate](https://replicate.com/) is a cloud-based service that allows machine learning models to be deployed

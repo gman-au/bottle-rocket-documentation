@@ -1,4 +1,7 @@
-﻿# Ollama
+﻿---
+description: "Connect to a local Ollama server for closed-network LLM services"
+---
+# Ollama
 
 ## Overview
 [Ollama](https://ollama.com/) is an open-source platform that simplifies running

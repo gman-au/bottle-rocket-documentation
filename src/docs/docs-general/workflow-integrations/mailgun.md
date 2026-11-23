@@ -1,4 +1,7 @@
-﻿# Mailgun
+﻿---
+description: "Send files via email using the Mailgun API"
+---
+# Mailgun
 
 ## Overview
 [Mailgun](https://www.mailgun.com/) is a cloud-based email-delivery client.

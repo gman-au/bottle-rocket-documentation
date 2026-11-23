@@ -1,4 +1,7 @@
-﻿# Postmark
+﻿---
+description: "Send files via email using the Postmark API"
+---
+# Postmark
 
 ## Overview
 [Postmark](https://postmarkapp.com/) is a cloud-based email-delivery client.

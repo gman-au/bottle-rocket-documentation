@@ -1,5 +1,6 @@
 ﻿---
 sidebar_position: 3
+description: "Installing and configuring the Bottle Rocket mobile app"
 ---
 # Mobile app installation
 The following steps outline the installation process for the Bottle Rocket client (mobile app).
@@ -34,7 +35,7 @@ before you can connect to it.
 * You should be presented with a main menu / landing screen.
 
 <div class="text--center">
-![Mobile app - landing menu](/img/mobileLandingScreen.png)
+![Mobile app - landing menu](/img/mobileConnectScreen.png)
 </div>
 
 * Tap the **Settings** option.

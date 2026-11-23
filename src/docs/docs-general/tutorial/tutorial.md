@@ -1,4 +1,7 @@
-﻿# Set up and run a basic workflow
+﻿---
+description: "A sample workflow guide to scan text and upload it"
+---
+# Set up and run a basic workflow
 
 ## Overview
 This tutorial will walk you through an example Bottle Rocket use case involving:
