@@ -40,6 +40,8 @@ The details screen contains the entire set of scans for a given batch.
 
 For each scanned image:
 * Click the image to bring up a full-sized display of the image that was captured.
+* If the text in the image has been [transcribed](./searching-your-scans.md#transcribing-an-image-to-text), click the **transcription** button to view the data
+that Bottle Rocket was able to transcribe from the image.
 * Click the **download** icon to the right of the image to download the captured image to your local file system.
 * Click the **trash / delete** icon to the right of the image to confirm deletion of the image.
 * You can use this page to trigger a [workflow](../configure-your-server/workflows#what-are-workflows)

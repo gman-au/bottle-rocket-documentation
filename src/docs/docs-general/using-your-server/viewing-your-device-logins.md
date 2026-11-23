@@ -1,5 +1,5 @@
 ﻿---
-sidebar_position: 2
+sidebar_position: 3
 description: "Viewing and managing Bottle Rocket login sessions"
 ---
 # Viewing your device logins
