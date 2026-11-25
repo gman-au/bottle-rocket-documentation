@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bottle Rocket API",
-    "version": "v3.0.0.0-alpha.3"
+    "version": "v3.0.0.1"
   },
   "paths": {
     "/api/Auth/login": {
@@ -173,7 +173,7 @@
           "Authentication"
         ],
         "summary": "Logout",
-        "description": "Logout / revoke one or more sessions.\nIf LogoutAll is set to 'true', it will revoke all sessions for the user.\"",
+        "description": "Logout / revoke one or more sessions.\nIf LogoutAll is set to 'true', it will revoke all sessions for the user.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -537,7 +537,7 @@
           "Manage captures / scans"
         ],
         "summary": "Close a batch",
-        "description": "Closes an (open) batch./nThe user can also opt to run one or more workflows against the entire batch.",
+        "description": "Closes an (open) batch.\nThe user can also opt to run one or more workflows against the entire batch.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -962,7 +962,7 @@
           "Manage captures / scans"
         ],
         "summary": "Process captured image(s)",
-        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.\n\nYou can bind this scanned image to one or more workflows using the workflows parameter.\n\nInclude the batch ID in order to add the scanned image to the batch without processing any workflows.\n\nIf no batch ID is provided, the scanned image will be allocated to a single batch.\n\nIf you wish to simply upload a captured image to the system and trigger a manual workflow, the qr_code and qr_bounding_box\nparameters can be omitted.",
+        "description": "Process uploaded images via this endpoint. Use the url-encoded multipart form schema to POST the image data.\n\nYou can bind this scanned image to one or more workflows using the workflows parameter.\n\nInclude the batch ID in order to add the scanned image to the batch without processing any workflows.\n\nIf no batch ID is provided, the scanned image will be allocated to a single batch, which is opened and closed within the\nsingle transaction.",
         "requestBody": {
           "content": {
             "application/x-www-form-urlencoded": {
@@ -1204,6 +1204,184 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteScanResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scans/transcription/{batchId}/{scanId}": {
+      "get": {
+        "tags": [
+          "Manage captures / scans"
+        ],
+        "summary": "Fetch the scan transcription details",
+        "description": "Retrieves the full (text) transcription a users scan by its unique ID and batch ID.\n\nThe response will also include the execution ID and name that performed the transcription. ",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTranscriptionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTranscriptionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTranscriptionResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scans/transcription/delete/{batchId}/{scanId}": {
+      "delete": {
+        "tags": [
+          "Manage captures / scans"
+        ],
+        "summary": "(Permanently) delete a scan transcription",
+        "description": "Permanently and completely deletes any scan transcription by its unique scan ID.\n\nAll traces of the transcription will be removed.",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTranscriptionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTranscriptionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteTranscriptionResponse"
                 }
               }
             }
@@ -1977,7 +2155,7 @@
           "Manage connectors"
         ],
         "summary": "Finalize a Google connector",
-        "description": "Finalizes a Google connector for the given user.\n\nWhen this endpoint is called, it is assumed that the user has already navigated to the Google authorization URL,\nauthenticated, approved permissions, and copied the access code into the form / API request.\nThe access code will be sent back to Google ",
+        "description": "Finalizes a Google connector for the given user.\n\nWhen this endpoint is called, it is assumed that the user has already navigated to the Google authorization URL,\nauthenticated, approved permissions, and copied the access code into the form / API request.\nThe access code will be sent back to Google for finalization.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2288,6 +2466,188 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAllNotionParentNotesResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ollama/models": {
+      "post": {
+        "tags": [
+          "Manage connectors"
+        ],
+        "summary": "List available Ollama models and their capabilities",
+        "description": "Attempts to retrieve a list of installed models on the given Ollama connector.\n\nIf successful, the Ollama server should return a list of models and their capabilities.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OllamaListModelsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OllamaListModelsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OllamaListModelsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OllamaListModelsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OllamaListModelsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OllamaListModelsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/openai/models": {
+      "post": {
+        "tags": [
+          "Manage connectors"
+        ],
+        "summary": "List available OpenAI models and their capabilities",
+        "description": "Attempts to retrieve a list of installed models on the given OpenAI connector.\n\nIf successful, the OpenAI server should return a list of models and their capabilities.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenAiListModelsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenAiListModelsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenAiListModelsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAiListModelsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAiListModelsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAiListModelsResponse"
                 }
               }
             }
@@ -4670,9 +5030,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "archived": {
-            "type": "boolean"
-          },
           "error_code": {
             "type": "integer",
             "format": "int32"
@@ -5053,6 +5410,19 @@
         }
       },
       "DeleteScanResponse": {
+        "type": "object",
+        "properties": {
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DeleteTranscriptionResponse": {
         "type": "object",
         "properties": {
           "error_code": {
@@ -5538,6 +5908,22 @@
           }
         }
       },
+      "GetTranscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "transcription": {
+            "$ref": "#/components/schemas/TranscriptionSummary"
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "GlobalSettingsSpecifics": {
         "type": "object",
         "properties": {
@@ -5728,6 +6114,10 @@
           "record_count": {
             "type": "integer",
             "format": "int32"
+          },
+          "search_term": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -5844,6 +6234,63 @@
           }
         }
       },
+      "OllamaListModelsRequest": {
+        "type": "object",
+        "properties": {
+          "connector_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OllamaListModelsResponse": {
+        "type": "object",
+        "properties": {
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OllamaModel"
+            },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OllamaModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "nullable": true
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
       "OneNoteSection": {
         "type": "object",
         "properties": {
@@ -5852,6 +6299,44 @@
             "nullable": true
           },
           "section_name": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OpenAiListModelsRequest": {
+        "type": "object",
+        "properties": {
+          "connector_id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OpenAiListModelsResponse": {
+        "type": "object",
+        "properties": {
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAiModel"
+            },
+            "nullable": true
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OpenAiModel": {
+        "type": "object",
+        "properties": {
+          "name": {
             "type": "string",
             "nullable": true
           }
@@ -6054,6 +6539,9 @@
           "thumbnail_base64": {
             "type": "string",
             "nullable": true
+          },
+          "is_transcribed": {
+            "type": "boolean"
           }
         }
       },
@@ -6142,6 +6630,39 @@
             "nullable": true
           }
         }
+      },
+      "TranscriptionSummary": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "execution_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "execution_step_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "execution_exists": {
+            "type": "boolean"
+          },
+          "transcription_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "error_code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error_message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "nullable": true
       },
       "UpdateUserResponse": {
         "type": "object",
